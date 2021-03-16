@@ -22,35 +22,17 @@ from flask import Flask, redirect, url_for, request, render_template
 from werkzeug.utils import secure_filename
 from gevent.pywsgi import WSGIServer
 
-
-#tell our app where our saved model is
-# sys.path.append(os.path.abspath("./model"))
-# from load import *
-#initalize our flask app
 app = Flask(__name__)
-#global vars for easy reusability
-# global model, graph
-#initialize these variables
 
 
-
-# Load your trained model
-# model = load_model('model.h5')
-# model._make_predict_function()          # Necessary
-# print('Model loaded. Start serving...')
-
-# You can also use pretrained model from Keras
-# Check https://keras.io/applications/
-# from keras.applications.resnet50 import ResNet50
-# model = ResNet50(weights='imagenet')
-# model.save('')
-# print('Model loaded. Check http://127.0.0.1:5000/')
-
+# save your pre-trained model in two files.
+# save your architecture in "model.json" file
+# and save model weights in "model.h5"
 def init(): 
-    #Reading the model from JSON file
+    # Reading the model from JSON file
     with open('model.json', 'r') as json_file:
         loaded_model_json = json_file.read()
-    #load the model architecture 
+    # load the model architecture 
     loaded_model = model_from_json(loaded_model_json)
 
     loaded_model.load_weights("model.h5")
